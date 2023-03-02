@@ -20,7 +20,7 @@ public class CreateClientUseCaseTest extends ConfigIntegralTest {
     @Test()
     public void should_create_a_client_correctly() {
         char[] password = {'1', '2', '3', '4'};
-        Client clientIn = Client.builder()
+        Client clientIn = Client.clientBuilder()
                 .password(password)
                 .status(true)
                 .name("Jose Lema")

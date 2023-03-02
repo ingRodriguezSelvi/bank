@@ -1,7 +1,7 @@
 Bank Application
 
-Se analizo el problema y en medida de obtar por una solucion optima y escalable se desarrollo implementando Clean Architecture y un poco de DDD, el cual sigue el siguiente flujo:
-![img.png](img.png)
+Se analizo el problema y en medida de obtar por una solucion optima y escalable(Por ser una prueba tecnica y demostrar habilidades, mas no porque el problema lo amerite) se desarrollo implementando Clean Architecture y un poco de DDD, el cual sigue el siguiente flujo:
+![img_1.png](img_1.png)
 
 Tomando en consideracion el flujo anterior se llevo la distribucion del proyecto de la siguiente forma
 
@@ -21,3 +21,6 @@ Pendientes:
 
 -Separacion del dominio de las entidades del negocio con las entidades de la base de datos, aplicando un Mapper, garantizando asi un desacople completo de cualquier tecnologia de nuestra logica de negocio
 
+-Relacionar Tabla Client con Tabla Person y hacer una orquetacion ManyToOne
+
+-Por temas de desacoplacion de franmework de spring no se usaron las anotaciones de inyeccion de dependencias como @Autowired @Service @Component, por lo cual se definen los Bean en la capa de infra

@@ -5,7 +5,6 @@ import com.exercise.bankapplication.application.bankaccount.usecase.CreateTransa
 import com.exercise.bankapplication.domain.bankaccount.entities.Transaction;
 import com.exercise.bankapplication.integrations.configIntegralTest.ConfigIntegralTest;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class CreateTransactionsUseCaseTest extends ConfigIntegralTest {
     public void should_create_a_client_correctly() {
         Transaction transaction = Transaction.builder()
                 .date(LocalDate.of(2023,2,3))
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .value(575)
                 .accountId(100L)
                 .build();

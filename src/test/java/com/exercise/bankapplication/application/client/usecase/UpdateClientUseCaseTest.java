@@ -18,14 +18,14 @@ public class UpdateClientUseCaseTest {
     @Test
     public void veify_call_update_client(){
         char[] password = {'p', 'a', 's', 's', 'w', 'o', 'r', 'd'};
-        Client client = Client.builder()
+        Client client = Client.clientBuilder()
                 .password(password)
                 .status(true)
-                .name("")
-                .gender("")
+                .name("test")
+                .gender("M")
                 .age(18)
-                .address("")
-                .phone("")
+                .address("as")
+                .phone("3434")
                 .build();
         updateClientUseCase = new UpdateClientUseCase(clientService);
         updateClientUseCase.execute(client);

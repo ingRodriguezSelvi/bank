@@ -26,7 +26,7 @@ public class CreateBankAccountUseTest extends ConfigIntegralTest {
     @Test()
     public void should_create_a_bank_account_correctly() {
         char[] password = {'1', '2', '3', '4'};
-        Client clientIn = Client.builder()
+        Client clientIn = Client.clientBuilder()
                 .password(password)
                 .status(true)
                 .name("Jose Lema")

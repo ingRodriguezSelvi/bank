@@ -19,7 +19,7 @@ public class CreateBankAccountUseCase {
     }
 
     public BankAccountDTO execute(BankAccount bankAccount) {
-        Client client = clientService.searchById(bankAccount.getClientId());
+        Client client = clientService.findById(bankAccount.getClientId());
         BankAccount bankAccountDb = bankAccountService.create(bankAccount);
         return BankAccountDTO.builder()
                 .nameClient(client.getName())

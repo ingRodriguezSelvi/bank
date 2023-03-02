@@ -20,14 +20,14 @@ public class CreateClientUseCaseTest {
     @Test
     public void verify_call_create_client(){
         char[] password = {'p', 'a', 's', 's', 'w', 'o', 'r', 'd'};
-        Client client = Client.builder()
+        Client client = Client.clientBuilder()
                 .password(password)
                 .status(true)
-                .name("")
-                .gender("")
+                .name("TEST")
+                .gender("M")
                 .age(18)
-                .address("")
-                .phone("")
+                .address("XXX")
+                .phone("XXXX")
                 .build();
         createClientUseCase = new CreateClientUseCase(clientService);
         createClientUseCase.execute(client);

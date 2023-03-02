@@ -1,7 +1,10 @@
 package com.exercise.bankapplication.application.bankaccount.usecase;
 
+import com.exercise.bankapplication.application.bankaccount.dto.TransactionDTO;
+import com.exercise.bankapplication.domain.bankaccount.entities.BankAccount;
 import com.exercise.bankapplication.domain.bankaccount.entities.Transaction;
 import com.exercise.bankapplication.domain.bankaccount.services.BankAccountService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -13,7 +16,9 @@ public class CreateTransactionsUseCase {
         this.bankAccountService = bankAccountService;
     }
 
-    public Transaction execute(Transaction transaction){
-        return bankAccountService.createTransaction(transaction);
+    public TransactionDTO execute(Transaction transaction){
+        BankAccount bankAccount = bankAccountService.findById(transaction.getAccountId());
+        Transaction transactionDb = bankAccountService.createTransaction(transaction);
+        return new TransactionDTO(transactionDb, bankAccount);
     }
 }

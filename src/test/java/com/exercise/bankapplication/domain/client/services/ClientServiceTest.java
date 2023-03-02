@@ -1,6 +1,7 @@
 package com.exercise.bankapplication.domain.client.services;
 
 import com.exercise.bankapplication.domain.client.entities.Client;
+import com.exercise.bankapplication.domain.client.exeptions.InvalidClientException;
 import com.exercise.bankapplication.domain.client.repositories.ClientRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class ClientServiceTest {
 
     @Test
     public void should_not_update_the_client_because_it_doesnt_exist() {
-        Client client = Client.builder()
+        Client client = Client.clientBuilder()
                 .id(1L)
                 .password(password)
                 .status(true)
@@ -41,7 +42,6 @@ public class ClientServiceTest {
                 .address("Av Domingo Mendez")
                 .phone("4247335809")
                 .build();
-        when(clientRepository.searchById(1L)).thenReturn(Optional.empty());
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
             clientService.updateClient(client);
         });
@@ -50,7 +50,7 @@ public class ClientServiceTest {
 
     @Test
     public void should_not_update_the_client_because_it_has_logical_deletion() {
-        Client clientIn = Client.builder()
+        Client clientIn = Client.clientBuilder()
                 .id(1L)
                 .password(password)
                 .status(false)
@@ -60,7 +60,8 @@ public class ClientServiceTest {
                 .address("Av Domingo Mendez")
                 .phone("4247335809")
                 .build();
-        Client clientDb = Client.builder()
+        clientIn.setId(1L);
+        Client clientDb = Client.clientBuilder()
                 .id(1L)
                 .password(password)
                 .status(true)
@@ -70,6 +71,7 @@ public class ClientServiceTest {
                 .address("Av Domingo Mendez")
                 .phone("4247335809")
                 .build();
+        clientDb.setId(1L);
         when(clientRepository.searchById(1L)).thenReturn(Optional.of(clientDb));
 
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
@@ -80,7 +82,7 @@ public class ClientServiceTest {
 
     @Test
     public void should_update_the_client() {
-        Client clientIn = Client.builder()
+        Client clientIn = Client.clientBuilder()
                 .id(1L)
                 .password(password)
                 .status(true)
@@ -90,32 +92,16 @@ public class ClientServiceTest {
                 .address("Av Domingo Mendez")
                 .phone("4247335809")
                 .build();
+        clientIn.setId(1L);
         when(clientRepository.searchById(1L)).thenReturn(Optional.of(clientIn));
         clientService.updateClient(clientIn);
         Mockito.verify(clientRepository).update(clientIn);
     }
 
-    @Test
-    public void should_not_create_a_client_because_you_are_a_minor() {
-        Client clientIn = Client.builder()
-                .id(1L)
-                .password(password)
-                .status(true)
-                .name("Andres")
-                .gender("M")
-                .age(8)
-                .address("Av Domingo Mendez")
-                .phone("4247335809")
-                .build();
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            clientService.createClient(clientIn);
-        });
-        assertTrue(exception.getMessage().equals("El cliente no debe ser menor a 18 años"));
-    }
 
     @Test
     public void should_create_a_client() {
-        Client clientIn = Client.builder()
+        Client clientIn = Client.clientBuilder()
                 .id(1L)
                 .password(password)
                 .status(true)

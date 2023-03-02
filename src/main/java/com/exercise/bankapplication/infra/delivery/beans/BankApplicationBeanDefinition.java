@@ -2,6 +2,7 @@ package com.exercise.bankapplication.infra.delivery.beans;
 
 import com.exercise.bankapplication.application.bankaccount.usecase.CreateBankAccountUseCase;
 import com.exercise.bankapplication.application.bankaccount.usecase.CreateTransactionsUseCase;
+import com.exercise.bankapplication.application.bankaccount.usecase.GetTransactionsByDateAndUserUseCase;
 import com.exercise.bankapplication.application.client.usecase.CreateClientUseCase;
 import com.exercise.bankapplication.application.client.usecase.UpdateClientUseCase;
 import com.exercise.bankapplication.domain.bankaccount.repositories.BankAccountRepository;
@@ -32,6 +33,11 @@ public class BankApplicationBeanDefinition {
     @Bean
     public CreateTransactionsUseCase createTransactionsUseCase(BankAccountService bankAccountService){
         return new CreateTransactionsUseCase(bankAccountService);
+    }
+
+    @Bean
+    public GetTransactionsByDateAndUserUseCase getTransactionsByDateAndUserUseCase(BankAccountService bankAccountService, ClientService clientService){
+        return new GetTransactionsByDateAndUserUseCase(bankAccountService, clientService);
     }
 
     @Bean

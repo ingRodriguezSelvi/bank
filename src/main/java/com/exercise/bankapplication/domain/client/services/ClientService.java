@@ -14,9 +14,6 @@ public class ClientService {
     }
 
     public Client createClient(Client client) {
-        if (client.getAge() < 18) {
-            throw new RuntimeException("El cliente no debe ser menor a 18 años");
-        }
         return clientRepository.create(client);
     }
 
@@ -31,7 +28,7 @@ public class ClientService {
         return clientRepository.update(client);
     }
 
-    public Client searchById(Long id){
+    public Client findById(Long id){
         Optional<Client> clientOptional = clientRepository.searchById(id);
         if (clientOptional.isEmpty()){
             throw new RuntimeException("El cliente no existe");

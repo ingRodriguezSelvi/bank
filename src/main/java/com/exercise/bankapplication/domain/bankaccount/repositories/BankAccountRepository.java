@@ -8,6 +8,6 @@ public interface BankAccountRepository {
 
     BankAccount create(BankAccount bankAccount);
     BankAccount update(BankAccount bankAccount);
-
     Optional<BankAccount> searchById(Long id);
+    Optional<BankAccount> searchByClientId(Long id);
 }

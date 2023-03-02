@@ -1,5 +1,6 @@
 package com.exercise.bankapplication.domain.bankaccount.entities;
 
+import com.exercise.bankapplication.domain.bankaccount.exeptions.InvalidBankAccountException;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,20 +27,36 @@ public class BankAccount {
 
     @Builder
     private BankAccount(Integer number, String type, double startBalance, boolean status, long clientId) {
-        if( type== null || !type.equals(AHORRO) && !type.equals(CORRIENTE)) {
-            throw new IllegalArgumentException("Tipo de cuenta no válido");
-        }
-        if (clientId == 0) {
-            throw new IllegalArgumentException("El clientId no puede ser nulo");
-        }
-        if ( startBalance < 0 ){
-            throw new IllegalArgumentException("El monto de apertura no puede ser menor a 1$");
-        }
+        isValid(type, startBalance, clientId);
         this.number = number;
         this.type = type;
         this.startBalance = startBalance;
         this.status = status;
         this.clientId = clientId;
+    }
+
+    private static void isValid(String type, double startBalance, long clientId) {
+        if( type == null || !type.equals(AHORRO) && !type.equals(CORRIENTE)) {
+            throw new InvalidBankAccountException("Tipo de cuenta no válido");
+        }
+        if (clientId == 0) {
+            throw new InvalidBankAccountException("El clientId no puede ser nulo");
+        }
+        if ( startBalance < 0 ){
+            throw new InvalidBankAccountException("El monto de apertura no puede ser menor a 1$");
+        }
+    }
+
+    public static void isValid(BankAccount bankAccount) {
+        if( bankAccount.getType() == null || !AHORRO.equals(bankAccount.getType()) && !CORRIENTE.equals(bankAccount.getType())) {
+            throw new InvalidBankAccountException("Tipo de cuenta no válido");
+        }
+        if (bankAccount.getClientId() == 0) {
+            throw new InvalidBankAccountException("El clientId no puede ser nulo");
+        }
+        if ( bankAccount.getStartBalance() < 0 ){
+            throw new InvalidBankAccountException("El monto de apertura no puede ser menor a 1$");
+        }
     }
 
     public BankAccount(){}

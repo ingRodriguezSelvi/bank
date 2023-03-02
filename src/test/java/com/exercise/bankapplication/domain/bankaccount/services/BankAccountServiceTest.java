@@ -35,7 +35,7 @@ public class BankAccountServiceTest {
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(500)
-                .type(Transaction.DEPOSITO)
+                .type(Transaction.DEPOSIT)
                 .build();
         BankAccount account = BankAccount.builder()
                 .number(123456789)
@@ -57,13 +57,13 @@ public class BankAccountServiceTest {
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(50)
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .build();
         Transaction transaction = Transaction.builder()
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(500)
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .build();
         BankAccount account = BankAccount.builder()
                 .number(123456789)
@@ -86,13 +86,13 @@ public class BankAccountServiceTest {
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(100)
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .build();
         Transaction transaction = Transaction.builder()
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(550)
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .build();
         BankAccount account = BankAccount.builder()
                 .number(123456789)
@@ -116,13 +116,13 @@ public class BankAccountServiceTest {
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(1000)
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .build();
         Transaction transaction = Transaction.builder()
                 .accountId(10L)
                 .date(LocalDate.of(2023, 5, 18))
                 .value(500)
-                .type(Transaction.RETIRO)
+                .type(Transaction.WITHDRAW)
                 .build();
         BankAccount account = BankAccount.builder()
                 .number(123456789)
