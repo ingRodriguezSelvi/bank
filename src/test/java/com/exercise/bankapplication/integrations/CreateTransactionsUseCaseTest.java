@@ -1,6 +1,7 @@
 package com.exercise.bankapplication.integrations;
 
 import com.exercise.bankapplication.BankApplication;
+import com.exercise.bankapplication.application.bankaccount.dto.TransactionDTO;
 import com.exercise.bankapplication.application.bankaccount.usecase.CreateTransactionsUseCase;
 import com.exercise.bankapplication.domain.bankaccount.entities.Transaction;
 import com.exercise.bankapplication.integrations.configIntegralTest.ConfigIntegralTest;
@@ -14,17 +15,9 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = {BankApplication.class})
 public class CreateTransactionsUseCaseTest extends ConfigIntegralTest {
-
     @Autowired
     CreateTransactionsUseCase createTransactionsUseCase;
-
-
-
-
     @Test()
     @SqlGroup({
             @Sql(value = "/sql/data_to_create_transaction.sql"),
@@ -37,7 +30,8 @@ public class CreateTransactionsUseCaseTest extends ConfigIntegralTest {
                 .value(575)
                 .accountId(100L)
                 .build();
-        Transaction transactionPersist = createTransactionsUseCase.execute(transaction);
-        Assert.assertEquals(1425, transactionPersist.getBalance(),0.0);
+        TransactionDTO transactionPersist = createTransactionsUseCase.execute(transaction);
+        Assert.assertNotNull(transactionPersist);
+        Assert.assertEquals(transactionPersist.getTransaction(), transaction.getType() + " " + transaction.getValue());
     }
 }
