@@ -14,7 +14,8 @@ import lombok.experimental.SuperBuilder;
 public class Client extends Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="client_seq", sequenceName = "client_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="client_seq")
     private Long id;
     private  char[] password;
     private  boolean status;

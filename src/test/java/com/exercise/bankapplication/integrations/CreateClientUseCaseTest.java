@@ -3,31 +3,17 @@ package com.exercise.bankapplication.integrations;
 import com.exercise.bankapplication.BankApplication;
 import com.exercise.bankapplication.application.client.usecase.CreateClientUseCase;
 import com.exercise.bankapplication.domain.client.entities.Client;
+import com.exercise.bankapplication.integrations.configIntegralTest.ConfigIntegralTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {BankApplication.class})
-public class CreateClientTest {
-
-    private static final MyPostgresqlContainer postgresSQLContainer = MyPostgresqlContainer.getInstance();
-
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry registry) {
-
-        registry.add("spring.datasource.url", () -> postgresSQLContainer.getJdbcUrl());
-        registry.add("spring.datasource.username", postgresSQLContainer::getUsername);
-        registry.add("spring.datasource.password", postgresSQLContainer::getPassword);
-        registry.add("spring.flyway.enabled", () -> true);
-
-    }
-
+public class CreateClientUseCaseTest extends ConfigIntegralTest {
     @Autowired
     CreateClientUseCase createClientUseCase;
 

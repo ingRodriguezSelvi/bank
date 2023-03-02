@@ -1,4 +1,4 @@
-package com.exercise.bankapplication.integrations;
+package com.exercise.bankapplication.integrations.configIntegralTest;
 
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;

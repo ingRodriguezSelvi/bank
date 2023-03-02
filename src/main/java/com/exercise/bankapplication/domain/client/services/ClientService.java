@@ -30,4 +30,12 @@ public class ClientService {
         }
         return clientRepository.update(client);
     }
+
+    public Client searchById(Long id){
+        Optional<Client> clientOptional = clientRepository.searchById(id);
+        if (clientOptional.isEmpty()){
+            throw new RuntimeException("El cliente no existe");
+        }
+        return clientOptional.get();
+    }
 }

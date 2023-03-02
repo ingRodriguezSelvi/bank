@@ -12,8 +12,11 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 @SuperBuilder
 public class Person {
+    public static final String FEMALE = "F";
+    public static final String MALE = "M";
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="person_seq", sequenceName = "person_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_seq")
     private  Long id;
     private  String name;
     private  String gender;
